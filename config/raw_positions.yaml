@@ -1,9 +1,9 @@
 speech:
-  - 'I think this one is category {{category}}.'
-  - 'Is this one category {{category}}?'
-  - 'Surely this one is category {{category}}?'
-  - 'I am leaning towards category {{category}} for this one.'
-  - 'This could be category {{category}}.'
+  - 'Could this be in category {{category}}.'
+  - 'How about this to category {{category}}.'
+  - 'Maybe this is for category {{category}}.'
+  - 'This could be in category {{category}}.'
+  - 'This might go in category {{category}}.'
 
 natural:
     right_s0: -1.117505003974524
