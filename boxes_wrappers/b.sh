@@ -68,3 +68,11 @@ for i in $(ls $templates |sed -e s/Slide//|sed -e s/.png//); do
     rm -f pattern.png cube.png output.png;
 
 done
+
+echo "what is your university email address?"
+read EMAILADDRESS
+
+echo "The generated images have been added to your printer queue.";
+for file in $(ls *.png);do
+    echo "" |mail -s "ID: $(echo "$file" |sed -e s/.png//)" "emailprint@lincoln.ac.uk" -A $file -a "From: $EMAILADDRESS";
+done
