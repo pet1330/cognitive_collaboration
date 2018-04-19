@@ -76,3 +76,25 @@ echo "The generated images have been added to your printer queue.";
 for file in $(ls *.png);do
     echo "" |mail -s "ID: $(echo "$file" |sed -e s/.png//)" "emailprint@lincoln.ac.uk" -A $file -a "From: $EMAILADDRESS";
 done
+
+# New Quality
+
+for i in $(ls $templates |sed -e s/Slide//|sed -e s/.png//); do
+
+    input_file=$templates/Slide$i.png;
+    marker_file=$marker/$(printf "%08d.png" $i)
+    x="x";
+    p="+";
+    ca=$CXSize$x$CYSize$p$CXS$p$CYS;
+	convert $input_file -crop $ca -trim +repage -resize 152x152\! pattern/pattern$(printf "%02d.png" $i).bmp;
+	
+    marker_file=$marker/$(printf "%08d.svg" $i);
+    echo $i;
+    echo $marker_file;
+    echo $(printf "A%02d" $i).svg;
+    cat cube.svg |sed -e "s/fileLoc/$(printf '%08d.svg' $i)/g" |sed -e "s/numId/$(printf '%02d' $i)/g" |sed -e "s/patternLoc/$(printf '%02d.png' $i)/g" > $(printf "A%02d" $i).svg
+    rsvg-convert -f pdf -o $(printf "A%02d" $i).pdf $(printf "A%02d" $i).svg
+done
+
+
+
